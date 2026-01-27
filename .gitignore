@@ -1,0 +1,98 @@
+# Unity Editor و فایل‌های موقت
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+
+# فایل‌های حاوی اطلاعات حساس
+# (معمولاً شامل تنظیمات شخصی یا API Key ها می‌شود)
+/*.csproj
+/*.sln
+/*.suo
+/*.user
+/*.userprefs
+/*.pidb
+/*.booproj
+/*.svd
+
+# Auto-generated فایل‌های متا
+# (بجز مواردی که فایل اصلی وجود دارد)
+**/*.meta
+!/*.meta
+
+# فایل‌های پلاگین
+/[Aa]ssets/AssetStoreTools*
+/[Aa]ssets/Plugins*
+
+# Unity Asset Serialization
+# فایل‌های پشتیبانی از Asset Serialization
+*.private*
+*.private.meta
+
+# تنظیمات ویرایشگر
+.idea/
+.vscode/
+*.pidb.meta
+
+# فایل‌های پروژه Visual Studio
+ExportedObj/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+
+# macOS
+.DS_Store*
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+[Tt]humbs.db
+
+# لینک‌های نمادین
+*.symlink
+
+# Build گزارش‌های
+**/Assets/AddressableAssetsData/*.bin
+**/Assets/StreamingAssets/AA/*
+
+# فایل‌های آدرس‌دهی
+**/*.asmdef
+**/*.asmdef.meta
+
+# Shader فایل‌های 
+*.compute
+*.shader
+*.shadergraph
+*.shadersubgraph
+
+# Package Manager
+**/Packages/
+!**/Packages/manifest.json
+!**/Packages/packages-lock.json
+
+# Unity Cloud Build
+**/cloud-build*
+**/cloudbuild*
+
+# Crashlytics
+**/fabric*
+**/crashlytics*
+
+# Firebase
+**/firebase*
+
+# UPM
+**/upm*
