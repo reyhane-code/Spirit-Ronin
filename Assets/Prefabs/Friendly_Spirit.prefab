@@ -280,6 +280,8 @@ MonoBehaviour:
   moveSpeed: 5
   enemyType: 2
   targetXRange: 3
+  tapSound: {fileID: 8300000, guid: 68f762edde0d5b85096d268b4e8fd967, type: 3}
+  slashSound: {fileID: 8300000, guid: 55ee4ddb9b1bd024593419bc42b96d33, type: 3}
 --- !u!136 &4085068603259939792
 CapsuleCollider:
   m_ObjectHideFlags: 0

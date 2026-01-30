@@ -279,6 +279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dfcc82cafd3193a8a5af420e79a82ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: dd1afc52c760768b7b61fa1ef38f2e50, type: 3}
+  soundDelay: 0.2
 --- !u!4 &485170472
 Transform:
   m_ObjectHideFlags: 0

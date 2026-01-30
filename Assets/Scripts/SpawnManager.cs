@@ -42,8 +42,6 @@ public class SpawnManager : MonoBehaviour
                 spawnPoints.Add(p.transform);
         }
 
-        if (spawnPoints.Count == 0)
-            Debug.LogError("SpawnManager: No SpawnPoints found! (Tag = SpawnPoint)");
     }
 
     void EnsureContainer()
@@ -55,7 +53,6 @@ public class SpawnManager : MonoBehaviour
             enemyContainer = containerObj.transform;
     }
 
-    // ===================== SPAWNING CONTROL =====================
 
     public void StartSpawning()
     {
@@ -93,7 +90,6 @@ public class SpawnManager : MonoBehaviour
         Vector3 spawnPos = randomSpawn.position;
         spawnPos.y += spawnYOffset;
 
-        // Final overlap safety
         spawnPos = AvoidOverlap(spawnPos);
 
         GameObject prefab = ChooseEnemyByWeight();
@@ -101,15 +97,12 @@ public class SpawnManager : MonoBehaviour
 
         GameObject enemy = Instantiate(prefab, spawnPos, Quaternion.identity, enemyContainer);
 
-        // 🔹 Bigger scale (controlled)
         float scale = Random.Range(scaleRange.x, scaleRange.y);
         enemy.transform.localScale = Vector3.one * scale;
         enemy.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
 
-        Debug.Log($"Spawned {enemy.name} at X={spawnPos.x}");
     }
 
-    // ===================== HELPERS =====================
 
     Vector3 AvoidOverlap(Vector3 proposed)
     {

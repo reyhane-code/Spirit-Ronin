@@ -4,6 +4,8 @@ public class EnemyFriendly : Enemy
 {
     private bool wasTapped = false;
     private bool isHandled = false;
+    public AudioClip tapSound;
+    public AudioClip slashSound;
     protected override void Start()
     {
         base.Start();
@@ -14,6 +16,7 @@ public class EnemyFriendly : Enemy
     {
         if (isHandled) return;
         isHandled = true;
+        AudioSource.PlayClipAtPoint(slashSound, transform.position);
         GameManager.Instance?.LoseLife();
 
         Destroy(gameObject);
@@ -23,9 +26,8 @@ public class EnemyFriendly : Enemy
     public override void OnTapped()
     {
         if (wasTapped) return;
-
         wasTapped = true;
-
+        AudioSource.PlayClipAtPoint(tapSound, transform.position);
         GameManager.Instance?.AddScore(scoreValue);
 
         Destroy(gameObject, 0.05f);
