@@ -1,77 +1,86 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Collider))]
 public class Blade : MonoBehaviour
 {
-    [Header("Settings")]
-    public float minSliceVelocity = 0.01f;
-
-    [Header("References")]
+    public float minSliceVelocity = 0.5f;
     public TrailRenderer trail;
-    public Collider bladeCollider;
-
     private Vector3 lastPosition;
     private bool slicing;
-    private Coroutine startRoutine;
+    private Collider bladeCollider;
+    private Vector3 _lastPos;
+    private Vector3 _lastValidSliceDir;
 
     private void Awake()
     {
-        trail.emitting = false;
+        bladeCollider = GetComponent<Collider>();
+        bladeCollider.isTrigger = true;
         bladeCollider.enabled = false;
-    }
 
-    // ===================== CALLED BY InputManager =====================
+        if (trail != null)
+            trail.emitting = false;
+    }
 
     public void StartSlice(Vector3 startWorldPos)
     {
         slicing = true;
-
-        if (startRoutine != null)
-            StopCoroutine(startRoutine);
-
-        startRoutine = StartCoroutine(StartSliceRoutine(startWorldPos));
-    }
-
-    IEnumerator StartSliceRoutine(Vector3 startWorldPos)
-    {
-        // 1️⃣ قطع کامل
-        trail.emitting = false;
-        bladeCollider.enabled = false;
-
-        // 2️⃣ تلپورت
-        transform.position = startWorldPos;
         lastPosition = startWorldPos;
+        _lastPos = startWorldPos;
+        _lastValidSliceDir = Vector3.zero;
+        transform.position = startWorldPos;
 
-        // 3️⃣ پاکسازی
-        trail.Clear();
-
-        // 4️⃣ صبر یک فریم (کلید حل مشکل 👇)
-        yield return null;
-
-        // 5️⃣ شروع تریل جدید
-        trail.emitting = true;
+        if (trail != null)
+        {
+            trail.Clear();
+            trail.emitting = true;
+        }
     }
 
     public void UpdateSlice(Vector3 worldPos, float deltaTime)
     {
         if (!slicing) return;
 
-        transform.position = worldPos;
+        Vector3 delta = worldPos - _lastPos;
+        if (delta.sqrMagnitude > 0.0001f)
+            _lastValidSliceDir = delta.normalized;
+
+        _lastPos = worldPos;
 
         float velocity = (worldPos - lastPosition).magnitude / deltaTime;
         bladeCollider.enabled = velocity > minSliceVelocity;
 
+        transform.position = worldPos;
         lastPosition = worldPos;
     }
 
     public void EndSlice()
     {
         slicing = false;
-
-        if (startRoutine != null)
-            StopCoroutine(startRoutine);
-
-        trail.emitting = false;
+        if (trail != null)
+            trail.emitting = false;
         bladeCollider.enabled = false;
+        _lastValidSliceDir = Vector3.zero;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Enemy enemy = other.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            Vector3 sliceDir = _lastValidSliceDir;
+            sliceDir.z = 0f;
+            if (sliceDir.sqrMagnitude < 0.0001f)
+                sliceDir = (transform.position - lastPosition);
+            sliceDir.z = 0f;
+            sliceDir.Normalize();
+
+            enemy.OnSliced(sliceDir);
+        }
+    }
+
+    public Vector3 GetLastSliceDirection()
+    {
+        return _lastValidSliceDir;
     }
 }

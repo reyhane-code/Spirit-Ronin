@@ -4,40 +4,25 @@ using System.Collections.Generic;
 
 public class SpawnManager : MonoBehaviour
 {
-    [Header("Enemy Prefabs")]
     public GameObject armoredEnemyPrefab;
     public GameObject splitterEnemyPrefab;
     public GameObject friendlySpiritPrefab;
-
-    [Header("Spawning Settings")]
     public float initialSpawnDelay = 2f;
     public float timeBetweenSpawns = 2.5f;
     public bool spawnEnemies = true;
-
-    [Header("Spawn Area")]
     public Transform enemyContainer;
     public float spawnYOffset = -10f;
-
-    [Header("Spawn Variations")]
     public float randomOffset = 3f;
     public float minDistanceBetweenEnemies = 2f;
-
-    [Header("Unique X Control")]
     public float minXDifference = 1.5f;
-
-    [Header("Scale")]
     public Vector2 scaleRange = new Vector2(1.1f, 1.3f);
-
-    [Header("Enemy Weights (0-100)")]
     [Range(0, 100)] public float armoredWeight = 40f;
     [Range(0, 100)] public float splitterWeight = 40f;
     [Range(0, 100)] public float friendlyWeight = 20f;
-
     private List<Transform> spawnPoints = new List<Transform>();
     private HashSet<float> usedXPositions = new HashSet<float>();
     private Coroutine spawnRoutine;
 
-    // ===================== UNITY =====================
 
     private void Start()
     {
@@ -45,8 +30,6 @@ public class SpawnManager : MonoBehaviour
         EnsureContainer();
         StartSpawning();
     }
-
-    // ===================== SETUP =====================
 
     void CacheSpawnPoints()
     {
@@ -101,7 +84,6 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    // ===================== CORE SPAWN =====================
 
     void SpawnRandomEnemy()
     {
@@ -165,7 +147,6 @@ public class SpawnManager : MonoBehaviour
         return friendlySpiritPrefab;
     }
 
-    // ===================== CLEANUP =====================
 
     public void RemoveX(float x)
     {

@@ -1,22 +1,21 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
-    [Header("UI")]
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI comboText;
-    [SerializeField] private TextMeshProUGUI[] comboMessages;
-    [SerializeField] private GameObject[] lifeIcons;
-
-    [Header("Game Settings")]
-    [SerializeField] private int startLives = 3;
-    [SerializeField] private float comboTimeWindow = 2f;
-    [SerializeField] private float comboBonus = 0.2f;
-
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI comboText;
+    public TextMeshProUGUI[] comboMessages;
+    public GameObject[] lifeIcons;
+    public int startLives = 3;
+    public float comboTimeWindow = 2f;
+    public float comboBonus = 0.2f;
+    public GameObject gameOverPanel;
+    public float slowMotionScale = 0.15f;
+    public float slowMotionDuration = 0.5f;
     private int score;
     private int lives;
     private int comboCount;
@@ -46,8 +45,6 @@ public class GameManager : MonoBehaviour
         UpdateLivesUI();
         HideCombo();
     }
-
-    // ================= SCORE =================
 
     public void AddScore(int basePoints)
     {
@@ -82,7 +79,6 @@ public class GameManager : MonoBehaviour
         scoreText.text = score.ToString();
 
     }
-
 
     private void UpdateLivesUI()
     {
@@ -122,8 +118,6 @@ public class GameManager : MonoBehaviour
             comboText.gameObject.SetActive(false);
     }
 
-    // ================= LIFE =================
-
     public void LoseLife()
     {
         lives--;
@@ -137,16 +131,33 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log($"GAME OVER | Final Score: {score}");
-        // TODO: show game over panel
+        StartCoroutine(GameOverSequence());
     }
 
-    // ================= DEBUG =================
-
-    public void ResetGame()
+    private IEnumerator GameOverSequence()
     {
-        InitializeGame();
+        // 1️⃣ Slow motion
+        Time.timeScale = slowMotionScale;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+        yield return new WaitForSecondsRealtime(slowMotionDuration);
+
+        Time.timeScale = 0f;
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
     }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f;
+
+        gameOverPanel.SetActive(false);
+        SceneManager.LoadScene("MainScene");
+
+    }
+
 
 
 }

@@ -2,14 +2,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("Base Enemy Settings")]
     public int scoreValue = 100;
     public float moveSpeed = 5f;
     public EnemyType enemyType;
-
-    [Header("Target X Range")]
-    public float targetXRange = 3f;       // بازه X (±)
-
+    public float targetXRange = 3f;
     protected Rigidbody rb;
     protected Vector3 targetPosition;
 
@@ -33,10 +29,8 @@ public class Enemy : MonoBehaviour
         GameObject playArea = GameObject.Find("PlayArea");
         if (playArea != null)
         {
-            // X range random
             float randomX = Random.Range(-targetXRange, targetXRange);
 
-            // Keep Y from PlayArea
             float targetY = playArea.transform.position.y;
 
             targetPosition = new Vector3(randomX, targetY, playArea.transform.position.z);
@@ -45,24 +39,20 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
-        // Move toward target
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
-        // Destroy if too far from target (safety)
         if (Vector3.Distance(transform.position, targetPosition) > 15f)
         {
             Destroy(gameObject);
         }
     }
 
-    // Called when blade hits this enemy
     public virtual void OnSliced(Vector3 sliceDirection)
     {
         GameManager.Instance?.AddScore(scoreValue);
         Destroy(gameObject);
     }
 
-    // Called when tapped (for friendly spirits)
     public virtual void OnTapped()
     {
         GameManager.Instance?.AddScore(scoreValue);

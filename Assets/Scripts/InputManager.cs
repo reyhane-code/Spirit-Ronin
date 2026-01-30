@@ -2,11 +2,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [Header("Tap vs Swipe")]
     public float maxTapTime = 0.2f;
-    public float minSwipeDistance = 50f; // pixels
-
-    [Header("References")]
+    public float minSwipeDistance = 50f;
     public Blade blade;
     public Camera mainCamera;
 
@@ -29,7 +26,6 @@ public class InputManager : MonoBehaviour
 #endif
     }
 
-    // ===================== MOUSE (EDITOR) =====================
 
     void HandleMouse()
     {
@@ -42,8 +38,6 @@ public class InputManager : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
             TouchEnd(Input.mousePosition);
     }
-
-    // ===================== TOUCH (MOBILE) =====================
 
     void HandleTouch()
     {
@@ -68,8 +62,6 @@ public class InputManager : MonoBehaviour
                 break;
         }
     }
-
-    // ===================== CORE LOGIC =====================
 
     void TouchStart(Vector2 screenPos)
     {
@@ -106,8 +98,6 @@ public class InputManager : MonoBehaviour
 
         blade.EndSlice();
     }
-
-    // ===================== TAP =====================
 
     void HandleTap(Vector2 screenPos)
     {

@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 4065880773081770746}
   - component: {fileID: 387891633954655930}
   - component: {fileID: 1354865336848514177}
-  - component: {fileID: 7252091488549374905}
   m_Layer: 0
-  m_Name: WeakPointArrow
+  m_Name: pointArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2233269018193017719}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.001, y: 0.863, z: 0}
-  m_LocalScale: {x: 0.16615245, y: 0.3, z: 0.01}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: 0.014, y: 0.782, z: 0}
+  m_LocalScale: {x: 0.68641996, y: 0.15765, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7149139080382497513}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!33 &387891633954655930
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -51,11 +50,11 @@ MeshRenderer:
   m_GameObject: {fileID: 2233269018193017719}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7252091488549374905
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2233269018193017719}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7258783767961183490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,15 +191,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreValue: 10
-  moveSpeed: 7
+  moveSpeed: 4
   enemyType: 0
-  targetPosition: {x: 0, y: -150, z: 0}
-  requiredSlashDirection: {x: 0, y: -1, z: 0}
-  allowedAngleError: 20
-  blockEffectDuration: 0.3
-  weakPointArrow: {fileID: 2233269018193017719}
-  correctSlashMaterial: {fileID: 2100000, guid: b6ce1b442e9247f258a01ec33bb948cb, type: 2}
-  blockedSlashMaterial: {fileID: 2100000, guid: de426dbae989bc3a8a8eaa0eebda5132, type: 2}
+  targetXRange: 3
+  alignmentThreshold: 0.7
+  blockSound: {fileID: 8300000, guid: 58cdde5cf4b98f0df96bd0583ad086aa, type: 3}
+  hitSound: {fileID: 8300000, guid: e817f74a654829bd2a5d961760b4e2ee, type: 3}
+  hitParticlePrefab: {fileID: 397834748365171609, guid: a3ba957214c8167939b70d75845ea277, type: 3}
+  blockColor: {r: 0.59179914, g: 0.47259971, b: 0.9243878, a: 1}
 --- !u!136 &3483266697110446398
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -241,10 +218,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.71476567
+  m_Radius: 0.24822842
   m_Height: 1.8366971
   m_Direction: 1
-  m_Center: {x: -0.010707378, y: 0.85179496, z: 0}
+  m_Center: {x: -0.010707378, y: 0.8517949, z: -0.46653724}
 --- !u!54 &1587562085059617448
 Rigidbody:
   m_ObjectHideFlags: 0

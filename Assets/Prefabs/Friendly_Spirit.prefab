@@ -279,8 +279,8 @@ MonoBehaviour:
   scoreValue: 5
   moveSpeed: 5
   enemyType: 2
-  savedColor: {r: 0, g: 0.78180194, b: 1, a: 1}
-  tapScoreBonus: 50
+  targetXRange: 3
+  savedColor: {r: 0.35791498, g: 0.9766984, b: 0.43938887, a: 0.84705883}
 --- !u!136 &4085068603259939792
 CapsuleCollider:
   m_ObjectHideFlags: 0
