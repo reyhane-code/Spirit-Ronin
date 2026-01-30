@@ -668,13 +668,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreValue: 1
-  moveSpeed: 3
+  moveSpeed: 5
   enemyType: 1
   targetXRange: 3
   splitChildPrefab: {fileID: 2439255820200460945, guid: 7989d31e61c8a9e23b958a042609eecd, type: 3}
   splitCount: 2
   splitForce: 2.5
-  hitSound: {fileID: 8300000, guid: e817f74a654829bd2a5d961760b4e2ee, type: 3}
+  hitSound: {fileID: 8300000, guid: 029ef3fa4465d8f11a0b64b36704c566, type: 3}
 --- !u!54 &6309690800144308776
 Rigidbody:
   m_ObjectHideFlags: 0

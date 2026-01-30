@@ -191,10 +191,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreValue: 10
-  moveSpeed: 4
+  moveSpeed: 6
   enemyType: 0
   targetXRange: 3
-  alignmentThreshold: 0.7
+  alignmentThreshold: 0.5
   blockSound: {fileID: 8300000, guid: 58cdde5cf4b98f0df96bd0583ad086aa, type: 3}
   hitSound: {fileID: 8300000, guid: e817f74a654829bd2a5d961760b4e2ee, type: 3}
   hitParticlePrefab: {fileID: 397834748365171609, guid: a3ba957214c8167939b70d75845ea277, type: 3}

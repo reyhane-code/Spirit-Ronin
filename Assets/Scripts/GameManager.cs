@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI[] comboMessages;
     public GameObject[] lifeIcons;
     public int startLives = 3;
-    public float comboTimeWindow = 2f;
+    public float comboTimeWindow = 1f;
     public float comboBonus = 0.2f;
     public GameObject gameOverPanel;
     public float slowMotionScale = 0.15f;
@@ -69,8 +69,6 @@ public class GameManager : MonoBehaviour
         float multiplier = 1f + (comboCount * comboBonus);
         return Mathf.RoundToInt(basePoints * multiplier);
     }
-
-    // ================= UI =================
 
     private void UpdateScoreUI()
     {
